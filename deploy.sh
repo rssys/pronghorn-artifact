@@ -2,6 +2,7 @@
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 echo $DIR
+echo "  - $(cat ~/.ssh/id_rsa.pub)" >> multipass.yaml
 
 # Default configuration
 nodes=3
@@ -25,7 +26,7 @@ do
 done
 
 # Deploy Kubernetes Cluster
-k3sup install --ip $(multipass info pronghorn | grep IPv4 | awk '{print $2}') --user ubuntu --k3s-extra-args '--cluster-init'  --ssh-key ~/.ssh/id_rsa
+k3sup install --ip $(multipass info pronghorn | grep IPv4 | awk '{print $2}') --user ubuntu --k3s-extra-args '--cluster-init'
 for node in $(seq 2 $nodes)
 do
     k3sup join --ip $(multipass info pronghorn-m0$node | grep IPv4 | awk '{print $2}') --server-ip $(multipass info pronghorn | grep IPv4 | awk '{print $2}') --user ubuntu
