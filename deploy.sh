@@ -79,16 +79,18 @@ sed -e "s|DIR|$DIR|" $DIR/yaml/minio.yaml | kubectl apply -f -
 kubectl apply -f $DIR/yaml/minio-service.yaml
 
 # Deploy Database
-sed -e "s|DIR|$DIR|" $DIR/database | make build-docker
+cd ~/pronghorn-artifact/database
+make build-docker
+cd $DIR
 sed -e "s|DIR|$DIR|" $DIR/database | kubectl apply -f -
 kubectl apply -f $DIR/database/pod.yaml
 
 # Check MinIO deployment
 attempts=0
-pod_name=$(kubectl get pod -n store -o jsonpath='{.items[0].metadata.name}')
+pod_name=$(kubectl get pod -n stores -o jsonpath='{.items[0].metadata.name}')
 
 while [[ "$attempts" -lt 3 ]]; do
-    pod_status=$(kubectl get pod -n store $pod_name -o jsonpath='{.status.phase}')
+    pod_status=$(kubectl get pod -n stores $pod_name -o jsonpath='{.status.phase}')
     if [[ "$pod_status" == "Running" ]]; then
         echo "[Completed] MinIO Deployed on Cluster."
         break
@@ -108,7 +110,7 @@ fi
 attempts=0
 
 while [[ "$attempts" -lt 3 ]]; do
-    service_ip=$(kubectl get svc minio-svc -n store -o jsonpath='{.spec.clusterIP}')
+    service_ip=$(kubectl get svc minio-svc -n stores -o jsonpath='{.spec.clusterIP}')
     if [[ -n "$service_ip" ]]; then
         echo "[Completed] MinIO Service Deployed."
         break
