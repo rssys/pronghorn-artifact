@@ -3,6 +3,7 @@
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 echo $DIR
 
+# Configuring yaml files
 if [ -f multipass.yaml ]; then
     rm multipass.yaml
 fi
@@ -10,6 +11,74 @@ touch multipass.yaml
 echo "# multipass.yaml" >> multipass.yaml
 echo "ssh_authorized_keys:" >> multipass.yaml
 echo "  - $(cat ~/.ssh/id_rsa.pub)" >> multipass.yaml
+
+# Define the directory path
+data_dir="volumes/data"
+
+# Check if the directory exists
+if [ -d "$data_dir" ]; then
+    # Directory exists, so delete it
+    echo "Deleting existing directory: $data_dir"
+    rm -rf "$data_dir"
+fi
+
+# Create the directory
+echo "Creating directory: $data_dir"
+mkdir -p "$data_dir"
+
+# Verify that the directory now exists
+if [ -d "$data_dir" ]; then
+    echo "Directory created successfully: $data_dir"
+else
+    echo "Failed to create directory: $data_dir"
+fi
+if [ -f minio.yaml ]; then
+    rm minio.yaml
+fi
+echo "apiVersion: v1
+kind: Namespace
+metadata:
+  name: stores
+  labels:
+    name: stores
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+  namespace: stores
+spec:
+  selector:
+    matchLabels:
+      app: minio
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      containers:
+      - name: minio
+        image: quay.io/minio/minio:latest
+        command:
+        - /bin/bash
+        - -c
+        args:
+        - minio server /data --console-address :9090
+        ports:
+        - containerPort: 9000
+        volumeMounts:
+        - mountPath: /data
+          name: localvolume
+      nodeSelector:
+        kubernetes.io/hostname: pronghorn" >> minio.yaml
+data_dir=$(eval echo "~/volumes/data")
+echo "      volumes:
+        - name: localvolume
+          hostPath:
+            path: $(echo $data_dir)
+            type: DirectoryOrCreate" >> minio.yaml
+
 
 # Default configuration
 nodes=3

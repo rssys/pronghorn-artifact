@@ -36,7 +36,7 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: pronghorn
       volumes:
-      - name: localvolume
-        hostPath:
-          path: DIR/minio-data
-          type: DirectoryOrCreate
+        - name: localvolume
+          hostPath:
+            path: /home/shreyas/volumes/data
+            type: DirectoryOrCreate
