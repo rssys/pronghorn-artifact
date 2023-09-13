@@ -63,7 +63,7 @@ git clone https://github.com/rssys/pronghorn-artifact.git
 
 ### Deployment
 
-⏰ Estimated time: 4 machine minutes + 0 human minutes.
+⏰ Estimated time: 4 machine minutes
 
 The repository includes a `deploy.sh` script, which automates the process of spinning up and configuring a multi-node kubernetes cluster with our fork of OpenFaaS (an open-source serverless platform), MinIO (an open-source S3-compatible object store), and a lightweight key-value store.
 
