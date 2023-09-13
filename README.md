@@ -11,8 +11,10 @@ Hardware Requirements: We recommend employing a bare-metal machine with _A_ x86-
 Software Requirements: 
 
 - Linux (Ubuntu 22.04 Recommended).
-- Docker Engine v20.10.12 or higher.
+- Docker Engine v20.10.12 or higher. 
 - Kubernetes Server v1.21.1 or higher.
+
+Note: Please make sure to login to your DockerHub account on the testbed to make sure that the system assumes DockerHub as the image registry.
 
 Toolchain Requirements:
 
@@ -61,7 +63,7 @@ git clone https://github.com/rssys/pronghorn-artifact.git
 
 ### Deployment
 
-⏰ Estimated time: _X_ machine minutes + _Y_ human minutes.
+⏰ Estimated time: 4 machine minutes + 0 human minutes.
 
 The repository includes a `deploy.sh` script, which automates the process of spinning up and configuring a multi-node kubernetes cluster with our fork of OpenFaaS (an open-source serverless platform), MinIO (an open-source S3-compatible object store), and a lightweight key-value store.
 
@@ -70,3 +72,9 @@ chmod +x ./deploy.sh
 
 ./deploy.sh
 ```
+
+⚠️ Navigating Potential Deployment Errors
+
+- If any components of the toolchain show up as uninstalled post installation, make sure that you add the arkade binary directory to your PATH variable `export PATH=$PATH:$HOME/.arkade/bin/`
+- Make sure to run `ssh-keygen` before running the deployment script on newly provisioned testbed instances to ensure that `k3sup` and `multipass` have access to the host's public key.
+- Make sure to install the `build-essential` package using `sudo apt install build-essential`.

@@ -5,10 +5,11 @@ rebuild-docker: build-docker redeploy-k8s
 redeploy-docker: deploy-docker
 
 build-docker:
-	docker build --tag database:latest .
+	docker build --tag skharban/database:latest .
+	docker push skharban/database:latest
 
 deploy-docker:
-	docker run -d --network=host --privileged --name database database:latest
+	docker run -d --network=host --privileged --name database skharban/database:latest
 
 remove-docker:
 	(docker stop database && docker rm database) || true

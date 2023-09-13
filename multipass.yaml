@@ -1,2 +1,3 @@
 # multipass.yaml
 ssh_authorized_keys:
+  - <Your Key Here>

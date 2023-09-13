@@ -2,6 +2,13 @@
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 echo $DIR
+
+if [ -f multipass.yaml ]; then
+    rm multipass.yaml
+fi
+touch multipass.yaml
+echo "# multipass.yaml" >> multipass.yaml
+echo "ssh_authorized_keys:" >> multipass.yaml
 echo "  - $(cat ~/.ssh/id_rsa.pub)" >> multipass.yaml
 
 # Default configuration
@@ -36,7 +43,6 @@ echo "[Completed] Kuberentes cluster created with $nodes nodes, $cpus CPUs, $mem
 
 # Set correct contexts
 export KUBECONFIG="$DIR/kubeconfig"
-echo "Remember to export KUBECONFIG=\"$DIR/kubeconfig\""
 
 # Install OpenFaaS
 arkade install openfaas --set faasnetes.image=skharban/faas-netes:privileged-containers &> /dev/null
@@ -66,7 +72,9 @@ while true; do
 done
 
 # Port forward OpenFaaS Gateway
-kubectl port-forward -n openfaas svc/gateway 8080:8080 & 
+kubectl port-forward -n openfaas svc/gateway 8080:8080 &
+
+sleep 5s
 
 # Export OpenFaaS Password
 export OPENFAAS_PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
@@ -76,14 +84,10 @@ echo $OPENFAAS_PASSWORD > .credentials
 cat .credentials | faas-cli login --username admin --password-stdin
 
 # Deploy MinIO (Object Store)
-sed -e "s|DIR|$DIR|" $DIR/minio.yaml | kubectl apply -f -
+kubectl apply -f $DIR/minio.yaml
 kubectl apply -f $DIR/minio-service.yaml
 
 # Deploy Database
-cd ~/pronghorn-artifact/database
-make build-docker
-cd $DIR
-sed -e "s|DIR|$DIR|" $DIR/database | kubectl apply -f -
 kubectl apply -f $DIR/database/pod.yaml
 
 # Check MinIO deployment

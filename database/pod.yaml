@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: database
-          image: database:latest
+          image: skharban/database:latest
 ---
 apiVersion: v1
 kind: Service
