@@ -14,24 +14,13 @@ echo "  - $(cat ~/.ssh/id_rsa.pub)" >> multipass.yaml
 
 # Define the directory path
 data_dir="volumes/data"
-
 # Check if the directory exists
 if [ -d "$data_dir" ]; then
     # Directory exists, so delete it
     echo "Deleting existing directory: $data_dir"
     rm -rf "$data_dir"
 fi
-
-# Create the directory
-echo "Creating directory: $data_dir"
 mkdir -p "$data_dir"
-
-# Verify that the directory now exists
-if [ -d "$data_dir" ]; then
-    echo "Directory created successfully: $data_dir"
-else
-    echo "Failed to create directory: $data_dir"
-fi
 if [ -f minio.yaml ]; then
     rm minio.yaml
 fi
