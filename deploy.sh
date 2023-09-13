@@ -159,9 +159,30 @@ kubectl apply -f $DIR/minio-service.yaml
 # Deploy Database
 kubectl apply -f $DIR/database/pod.yaml
 
-# Check MinIO deployment
+# Check Database deployment
 attempts=0
 pod_name=$(kubectl get pod -n stores -o jsonpath='{.items[0].metadata.name}')
+
+while [[ "$attempts" -lt 3 ]]; do
+    pod_status=$(kubectl get pod -n stores $pod_name -o jsonpath='{.status.phase}')
+    if [[ "$pod_status" == "Running" ]]; then
+        echo "[Completed] Database Deployed on Cluster."
+        break
+    else
+        echo "[Waiting] Database Deployment In Progress"
+        sleep 10
+        attempts=$((attempts+1))
+    fi
+done
+
+if [[ "$attempts" -eq 3 ]]; then
+    echo "[Error] Database Deployment Failed."
+    exit 1
+fi
+
+# Check MinIO deployment
+attempts=0
+pod_name=$(kubectl get pod -n stores -o jsonpath='{.items[1].metadata.name}')
 
 while [[ "$attempts" -lt 3 ]]; do
     pod_status=$(kubectl get pod -n stores $pod_name -o jsonpath='{.status.phase}')
