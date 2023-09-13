@@ -38,5 +38,5 @@ spec:
       volumes:
         - name: localvolume
           hostPath:
-            path: /home/shreyas/volumes/data
+            path: /home/shreyas/pronghorn-artifact/volumes/data
             type: DirectoryOrCreate

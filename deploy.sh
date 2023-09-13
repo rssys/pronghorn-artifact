@@ -13,7 +13,7 @@ echo "ssh_authorized_keys:" >> multipass.yaml
 echo "  - $(cat ~/.ssh/id_rsa.pub)" >> multipass.yaml
 
 # Define the directory path
-data_dir="./volumes/data"
+data_dir="volumes/data"
 # Check if the directory exists
 if [ -d "$data_dir" ]; then
     # Directory exists, so delete it
@@ -61,7 +61,7 @@ spec:
           name: localvolume
       nodeSelector:
         kubernetes.io/hostname: pronghorn" >> minio.yaml
-data_dir=$(eval echo "~/volumes/data")
+data_dir="$DIR/volumes/data"
 echo "      volumes:
         - name: localvolume
           hostPath:
