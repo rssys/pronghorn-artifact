@@ -13,7 +13,7 @@ echo "ssh_authorized_keys:" >> multipass.yaml
 echo "  - $(cat ~/.ssh/id_rsa.pub)" >> multipass.yaml
 
 # Define the directory path
-data_dir="volumes/data"
+data_dir="./volumes/data"
 # Check if the directory exists
 if [ -d "$data_dir" ]; then
     # Directory exists, so delete it
