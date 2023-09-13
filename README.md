@@ -17,39 +17,18 @@ Software Requirements:
 Toolchain Requirements:
 
 - Multipass v1.12.2 or higher.
-
-```bash
-sudo snap install multipass
-```
-
 - Arkade v0.8.28 or higher.
-
-```bash
-curl -sLS https://get.arkade.dev | sudo sh
-```
-
 - Helm v3.5.2 or higher.
-
-```bash
-arkade get helm
-```
-
 - Kubectl v1.2.22 or higher.
-
-```bash
-arkade get kubectl
-```
-
 - k3sup v0.11.3 or higher.
-
-```bash
-arkade get k3sup
-```
-
 - faas-cli v0.14.2 or higher.
 
 ```bash
-arkade get faas-cli
+sudo snap install multipass
+
+curl -sLS https://get.arkade.dev | sudo sh
+
+arkade get helm kubectl k3sup faas-cli
 ```
 
 Configuration Requirements:
