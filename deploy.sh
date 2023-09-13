@@ -76,8 +76,8 @@ echo $OPENFAAS_PASSWORD > .credentials
 cat .credentials | faas-cli login --username admin --password-stdin
 
 # Deploy MinIO (Object Store)
-sed -e "s|DIR|$DIR|" $DIR/yaml/minio.yaml | kubectl apply -f -
-kubectl apply -f $DIR/yaml/minio-service.yaml
+sed -e "s|DIR|$DIR|" $DIR/minio.yaml | kubectl apply -f -
+kubectl apply -f $DIR/minio-service.yaml
 
 # Deploy Database
 cd ~/pronghorn-artifact/database
