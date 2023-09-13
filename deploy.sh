@@ -78,9 +78,10 @@ cat .credentials | faas-cli login --username admin --password-stdin
 sed -e "s|DIR|$DIR|" $DIR/yaml/minio.yaml | kubectl apply -f -
 kubectl apply -f $DIR/yaml/minio-service.yaml
 
-# Deploy CRUD Service
-sed -e "s|DIR|$DIR|" $DIR/crud-service | kubectl apply -f -
-kubectl apply -f $DIR/crud-service/pod.yaml
+# Deploy Database
+sed -e "s|DIR|$DIR|" $DIR/database | make build-docker
+sed -e "s|DIR|$DIR|" $DIR/database | kubectl apply -f -
+kubectl apply -f $DIR/database/pod.yaml
 
 # Check MinIO deployment
 attempts=0

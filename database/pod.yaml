@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  namespace: stores
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      bb: web
+  template:
+    metadata:
+      labels:
+        bb: web
+    spec:
+      containers:
+        - name: database
+          image: database:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-svc
+  namespace: stores
+spec:
+  type: ClusterIP
+  selector:
+    bb: web
+  ports:
+    - port: 5000
+      targetPort: 5000
+

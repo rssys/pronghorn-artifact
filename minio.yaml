@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: store
+  labels:
+    name: store
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+  namespace: store
+spec:
+  selector:
+    matchLabels:
+      app: minio
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      containers:
+      - name: minio
+        image: quay.io/minio/minio:latest
+        command:
+        - /bin/bash
+        - -c
+        args:
+        - minio server /data --console-address :9090
+        ports:
+        - containerPort: 9000
+        volumeMounts:
+        - mountPath: /data
+          name: localvolume
+      nodeSelector:
+        kubernetes.io/hostname: pronghorn
+      volumes:
+      - name: localvolume
+        hostPath:
+          path: DIR/minio-data
+          type: DirectoryOrCreate
