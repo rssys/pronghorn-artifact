@@ -34,7 +34,7 @@ class CRUD(object):
     # but only return the boolean and associated data, if applicable.
     # The boolean tracks whether or not someone has written to the
     # data since then.
-    HOST = "state-svc.store.svc.cluster.local:5000"
+    HOST = "database-svc.stores.svc.cluster.local:5000"
 
     def __init__(self, benchmark: str, simulate_local=False) -> None:
         self.benchmark = benchmark
@@ -133,7 +133,7 @@ class CRUD(object):
 def setup_minio():
     global client
     client = Minio(
-        "minio-svc.store.svc.cluster.local:9000",
+        "minio-svc.stores.svc.cluster.local:9000",
         access_key="minioadmin",
         secret_key="minioadmin",
         secure=False,

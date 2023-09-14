@@ -9,17 +9,14 @@ import numpy as np
 def cr_deserialize(payload: str, client: Minio):
     if not payload:
         # TODO FOR INTEGRATION: sensible defaults
-        # strategy_env = os.getenv("STRATEGY")
-        # print(f"Using strategy: {strategy_env}")
-        # if strategy_env == "ColdStart":
-        #     return ColdStartStrategy(Parameters(), [])
-        # elif strategy_env == "Fixed":
-        #     return FixedStrategy(Parameters(), [], 1)
-        # else:
-        #     return RequestCentricStrategy(Parameters(), [])
-        # return ColdStartStrategy(Parameters(), [])
-        return FixedStrategy(Parameters(), [], 1)
-        # return RequestCentricStrategy(Parameters(), [])
+        strategy_env = os.getenv("STRATEGY")
+        print(f"Using strategy: {strategy_env}")
+        if strategy_env == "cold":
+            return ColdStartStrategy(Parameters(), [])
+        elif strategy_env == "fixed&request_to_checkpoint=1":
+            return FixedStrategy(Parameters(), [], 1)
+        else:
+            return RequestCentricStrategy(Parameters(), [])
     obj = json.loads(payload)
     workload = Parameters.deserialize(obj["workload"])
     pool = [Checkpoint.deserialize(chkpt, client) for chkpt in obj["pool"]]

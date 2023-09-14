@@ -110,7 +110,7 @@ stores        database-75dc6bb78f-6zr2n                 1/1     Running     0   
 
 ### Build
 
-⏰ Estimated time: X machine minutes + 0 human minutes.
+⏰ Estimated time: 15 machine minutes + 0 human minutes.
 
 The repository includes a `benchmarks/build.sh` script, which automates the process of building the images for all the benchmarks and pushes it to the remote image registry.
 
@@ -128,8 +128,49 @@ The script will:
 - Deploy each benchmark and do a sanity check.
 - Perform clean up.
 
+A successful build process should look something like this:
+
+```bash
+pypy Functions that returned OK:
+ - bfs
+ - dfs
+ - dynamic-html
+ - mst
+ - pagerank
+ - compress
+ - upload
+ - thumbnail
+ - video
+pypy Functions that did NOT return OK:
+
+jvm Functions that returned OK:
+ - matrix-multiplication
+ - simple-hash
+ - word-count
+ - html-rendering
+jvm Functions that did NOT return OK:
+```
+
 
 ⚠️ Navigating Potential Build Errors
+
+## Basic Test
+
+⏰ Estimated time: X machine minutes + Y human minutes.
+
+Run the script `./run.sh basic`. This script will automatically run the whole pipeline of Pronghorn for one of the functions in the benchmarks and produce the results for chosen (function, runtime) in a CSV file, which can be used to produce a CDF plot of the latency.
+
+## Suite Test
+
+⏰ Estimated time: X machine minutes + Y human minutes.
+
+Run the script `./run.sh suite`. This script will automatically run the whole pipeline of Pronghorn for one of the suites (java or python) in the benchmarks and produce the results in a CSV file, which can be used to produce a CDF plot of the latency.
+
+## Evaluation
+
+⏰ Estimated time: X machine minutes + Y human minutes.
+
+Run the script `./run.sh evaluation`. This script will automatically run the whole pipeline of Pronghorn for the entire benchmarking suite and will produce two CSV files. pypy.csv and jvm.csv, which can be utilized to reproduce the figure X and figure Y in the paper.
 
 ## Directory Structure
 

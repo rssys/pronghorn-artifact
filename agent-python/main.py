@@ -26,7 +26,7 @@ def setup_minio():
 
     global client
     client = Minio(
-        "minio-svc.store.svc.cluster.local:9000",
+        "minio-svc.stores.svc.cluster.local:9000",
         access_key="minioadmin",
         secret_key="minioadmin",
         secure=False,
@@ -73,13 +73,17 @@ def after_request(latency):
 
             on_container_checkpoint(path)
 
-    if state["should_evict"] and False:
-        print("Received eviction notice")
-        pid = get_pypy_pid()
-        os.system(f"kill -9 {pid}")
-        os.system("killall pypy3")
-        print("Killed Python Process")
+    evictions_env = os.getenv("EVICTIONS")
+    if evictions_env == "True":
+        if state["should_evict"]:
+            print("Received eviction notice")
+            pid = get_pypy_pid()
+            os.system(f"kill -9 {pid}")
+            os.system("killall pypy3")
+            print("Killed Python Process")
         sys.exit(0)
+    else:
+        pass
 
 
 def init():
