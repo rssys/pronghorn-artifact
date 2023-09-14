@@ -78,6 +78,7 @@ def after_request(latency):
         if state["should_evict"]:
             print("Received eviction notice")
             pid = get_pypy_pid()
+            print(pid)
             os.system(f"kill -9 {pid}")
             os.system("killall pypy3")
             print("Killed Python Process")

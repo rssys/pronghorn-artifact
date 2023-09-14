@@ -77,7 +77,8 @@ def after_request(latency):
     if evictions_env == "true":
         if state["should_evict"]:
             print("Received eviction notice")
-            pid = get_pypy_pid()
+            pid = get_java_pid()
+            print(pid)
             os.system(f"kill -9 {pid}")
             os.system("killall java")
             print("Killed Java Process")
