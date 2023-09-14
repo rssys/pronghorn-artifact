@@ -5,5 +5,5 @@ provider:
 functions:
   json-parsing:
     lang: criu-java
-    handler: ./json-parsing
+    handler: ./java/json-parsing
     image: skharban/json-parsing:latest

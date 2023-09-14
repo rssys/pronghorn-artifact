@@ -5,5 +5,5 @@ provider:
 functions:
   matrix-multiplication:
     lang: criu-java
-    handler: ./matrix-multiplication
+    handler: ./java/matrix-multiplication
     image: skharban/matrix-multiplication:latest

@@ -3,7 +3,8 @@ provider:
   name: openfaas
   gateway: http://127.0.0.1:8080
 functions:
-  pagerank:
+  video:
     lang: criu-pypy
-    handler: ./pagerank
-    image: skharban/pagerank:latest
+    handler: ./python/video
+    image: skharban/video:latest
+

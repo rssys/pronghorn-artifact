@@ -53,6 +53,12 @@ docker buildx create --use --name pronghorn-builder --buildkitd-flags '--allow-i
 docker buildx inspect --bootstrap
 ```
 
+- Create a link to Pronghorn's template registry for OpenFaaS
+
+```bash
+export OPENFAAS_TEMPLATE_URL=https://github.com/Alphacode18/templates/
+```
+
 ### Download
 
 The code can be easily downloaded via:
@@ -102,14 +108,58 @@ stores        database-75dc6bb78f-6zr2n                 1/1     Running     0   
 - Make sure to run `ssh-keygen` before running the deployment script on newly provisioned testbed instances to ensure that `k3sup` and `multipass` have access to the host's public key.
 - Make sure to install the `build-essential` package using `sudo apt install build-essential`.
 
+### Build
+
+⏰ Estimated time: X machine minutes + 0 human minutes.
+
+The repository includes a `benchmarks/build.sh` script, which automates the process of building the images for all the benchmarks and pushes it to the remote image registry.
+
+```bash
+cd benchmarks
+
+chmod +x ./build.sh
+
+./build.sh
+```
+
+The script will:
+- Create the necessary build files for each benchmark.
+- Create a docker image for each benchmark.
+- Deploy each benchmark and do a sanity check.
+- Perform clean up.
+
+
+⚠️ Navigating Potential Build Errors
+
 ## Directory Structure
 
 ```
 📦 
 ├─ .gitignore
 ├─ README.md
-├─ agent-*  (Runtime-specific decentralized orchestrator)
-├─ database (Lightweight key-value store)
+├─ agent-java
+├─ agent-python
+├─ benchmarks
+│    ├─ java
+│    │  ├─ html-rendering
+│    │  ├─ json-parsing
+│    │  ├─ matrix-multiplication
+│    │  ├─ simple-hash
+│    │  └─ word-count
+│    ├─ python
+│    │ ├─ bfs
+│    │ ├─ compress
+│    │ ├─ dfs
+│    │ ├─ dynamic-html
+│    │ ├─ mst
+│    │ ├─ pagerank
+│    │ ├─ thumbnail
+│    │ ├─ upload
+│    │ ├─ video
+│    ├─ build_function.sh
+│    ├─ build_runtime.sh
+│    ├─ build_suite.sh
+├─ database
 ├─ deploy.sh 
 ├─ minio-service.yaml
 ├─ minio.yaml

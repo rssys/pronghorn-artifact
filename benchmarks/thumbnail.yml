@@ -3,7 +3,7 @@ provider:
   name: openfaas
   gateway: http://127.0.0.1:8080
 functions:
-  mst:
+  thumbnail:
     lang: criu-pypy
-    handler: ./mst
-    image: skharban/mst:latest
+    handler: ./python/thumbnail
+    image: skharban/thumbnail:latest

@@ -3,7 +3,8 @@ provider:
   name: openfaas
   gateway: http://127.0.0.1:8080
 functions:
-  compress:
+  dynamic-html:
     lang: criu-pypy
-    handler: ./compress
-    image: skharban/compress:latest
+    handler: ./python/dynamic-html
+    image: skharban/dynamic-html:latest
+

@@ -3,8 +3,7 @@ provider:
   name: openfaas
   gateway: http://127.0.0.1:8080
 functions:
-  dynamic-html:
+  dfs:
     lang: criu-pypy
-    handler: ./dynamic-html
-    image: dynamic-html:latest
-
+    handler: ./python/dfs
+    image: skharban/dfs:latest

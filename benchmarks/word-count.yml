@@ -5,5 +5,5 @@ provider:
 functions:
   word-count:
     lang: criu-java
-    handler: ./word-count
+    handler: ./java/word-count
     image: skharban/word-count:latest

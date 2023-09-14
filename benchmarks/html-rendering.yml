@@ -3,8 +3,7 @@ provider:
   name: openfaas
   gateway: http://127.0.0.1:8080
 functions:
-  simple-hash:
+  html-rendering:
     lang: criu-java
-    handler: ./simple-hash
-    image: skharban/simple-hash
-
+    handler: ./java/html-rendering
+    image: skharban/html-rendering:latest

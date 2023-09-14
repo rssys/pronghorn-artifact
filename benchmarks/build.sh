@@ -7,5 +7,5 @@ jvm_functions=( matrix-multiplication simple-hash word-count html-rendering )
 joined_pypy=$(IFS=','; echo "${pypy_functions[*]}")
 joined_jvm=$(IFS=','; echo "${jvm_functions[*]}")
 
-bash build_bench.sh $joined_pypy pypy
-bash build_bench.sh $joined_jvm jvm
+bash build_runtime.sh $joined_pypy pypy
+bash build_runtime.sh $joined_jvm jvm

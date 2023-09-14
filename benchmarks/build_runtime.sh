@@ -13,20 +13,26 @@ user=skharban
 # Directory of the script
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 
+# Arrays to store the results
+ok_functions=()
+not_ok_functions=()
+
 # Function to build Docker images
 build_docker_image() {
   identifier=$1
   if [ $platform == "pypy" ]; then
-    build_folder="./python"
+    build_folder="./"
     function_service="agent-python"
   else
-    build_folder="./java"
+    build_folder="./"
     function_service="agent-java"
   fi
 
+  faas-cli build --shrinkwrap -f "${identifier}.yml"
+
   echo "[$identifier] Injecting function-service..."
   rm -rf "${build_folder}/build/${identifier}/function-service" && echo "[$identifier] Service Deleted"
-  cp -r $DIR/../../${function_service} "${build_folder}/build/${identifier}" && echo "[$identifier] Service Copied"
+  cp -r $DIR/../${function_service} "${build_folder}/build/${identifier}" && echo "[$identifier] Service Copied"
   mv "${build_folder}/build/${identifier}/${function_service}" "${build_folder}/build/${identifier}/function-service" && echo "[$identifier] Service Renamed"
 
   echo "[$identifier] Building image..."
@@ -51,18 +57,20 @@ deploy_test_function() {
 
   if [[ "$status_code" == 200 ]] ; then
     echo "[$identifier] OK"
+    ok_functions+=("$identifier")
   else
     echo "[$identifier] NOT OK"
+    not_ok_functions+=("$identifier")
   fi
-
-  # Redeploy the crud-service
-  cd ../../crud-service && make redeploy-k8s > /dev/null 2>&1
-  cd ../packages/benchmarks
-  echo "[$identifier] Crud-service redeployed."
-  sleep 5s
 
   faas-cli remove ${identifier} > /dev/null 2>&1
   echo "[$identifier] Function removed."
+
+  # Redeploy the Database
+  cd ../database && make redeploy-k8s > /dev/null 2>&1
+  cd ../benchmarks
+  echo "[$identifier] Database redeployed."
+  sleep 5s
 }
 
 # Iterate over each function and start the build process in the background
@@ -78,4 +86,17 @@ echo "All images built and pushed."
 # Deploy and test functions sequentially
 for function in "${functions[@]}"; do
   deploy_test_function $function
+done
+
+# Display the results
+echo
+echo
+echo "$platform Functions that returned OK:"
+for func in "${ok_functions[@]}"; do
+  echo " - $func"
+done
+
+echo "$platform Functions that did NOT return OK:"
+for func in "${not_ok_functions[@]}"; do
+  echo " - $func"
 done
