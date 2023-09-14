@@ -9,7 +9,7 @@ import numpy as np
 def cr_deserialize(payload: str, client: Minio):
     if not payload:
         # TODO FOR INTEGRATION: sensible defaults
-        strategy_env = os.getenv("STRATEGY")
+        strategy_env = os.getenv("ENV").split(",")[0]
         print(f"Using strategy: {strategy_env}")
         if strategy_env == "cold":
             return ColdStartStrategy(Parameters(), [])

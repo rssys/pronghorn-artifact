@@ -55,7 +55,7 @@ deploy_test_function() {
   identifier=$1
 
   echo "[$identifier] Deploying function..."
-  faas-cli deploy --image=$user/${identifier} --name=${identifier} --env STRATEGY=cold EVICTIONS=True > /dev/null 2>&1
+  faas-cli deploy --image=$user/${identifier} --name=${identifier} --env=ENV=cold,true,1 > /dev/null 2>&1
   echo "[$identifier] Function deployed."
 
   sleep 5s

@@ -11,7 +11,7 @@ from function.storage import storage
 
 SEED = 42
 MIN_ITEMS = 1
-MAX_ITEMS = 3
+MAX_ITEMS = 5
 SCALING_FACTOR = 10 # To be decided
 
 random.seed(SEED)
@@ -116,7 +116,7 @@ def handle(mutability):
     process_begin = datetime.datetime.now()
     for num in range(reps):
         upload_path = operations[op](download_path, duration, event)
-        process_end = datetime.datetime.now()
+    process_end = datetime.datetime.now()
     upload_begin = datetime.datetime.now()
     filename = os.path.basename(upload_path)
     upload_size = os.path.getsize(upload_path)

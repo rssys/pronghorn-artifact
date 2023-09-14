@@ -11,7 +11,7 @@ from function.storage import storage
 
 SEED = 42
 MIN_ITEMS = 1
-MAX_ITEMS = 3
+MAX_ITEMS = 10
 SCALING_FACTOR = 10 # To be decided
 
 random.seed(SEED)
@@ -74,6 +74,7 @@ def handle(mutability):
     input_bucket = event.get('bucket').get('input')
     output_bucket = event.get('bucket').get('output')
     key = event.get('object').get('key')
+    reps = int(_generate_workload(mutability))
     download_path = '/tmp/{}-{}'.format(key, uuid.uuid4())
     os.makedirs(download_path)
 
@@ -83,7 +84,8 @@ def handle(mutability):
     size = parse_directory(download_path)
 
     compress_begin = datetime.datetime.now()
-    shutil.make_archive(os.path.join(download_path, key), 'zip', root_dir=download_path)
+    for num in range(reps):
+        shutil.make_archive(os.path.join(download_path, key), 'zip', root_dir=download_path)
     compress_end = datetime.datetime.now()
 
     s3_upload_begin = datetime.datetime.now()
@@ -98,8 +100,8 @@ def handle(mutability):
     clean_resources(input_bucket, key)
     clean_resources(output_bucket, key_name)
     return {
-        'mutability': mutability,
-        'size': archive_size,
-        'server_time': process_time,
-        'client_overhead': upload_time
-        }
+      'mutability': mutability,
+      'size': archive_size,
+      'server_time': process_time,
+      'client_overhead': upload_time
+    }

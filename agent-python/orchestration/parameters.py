@@ -1,6 +1,7 @@
+import os
 import json
 
-DEFAULT_EVICT_REQUESTS = 4
+DEFAULT_EVICT_REQUESTS = int(os.getenv("ENV").split(",")[2])
 DEFAULT_MAX_REQUESTS = 100
 
 

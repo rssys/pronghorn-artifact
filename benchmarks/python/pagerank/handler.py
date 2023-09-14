@@ -4,7 +4,7 @@ import networkx as nx
 
 SEED = 42
 MIN_ITEMS = 10
-MAX_ITEMS = 1000
+MAX_ITEMS = 200
 SCALING_FACTOR = 10 # To be decided
 
 random.seed(SEED)

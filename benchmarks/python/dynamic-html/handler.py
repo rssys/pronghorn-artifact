@@ -3,8 +3,8 @@ import random
 from jinja2 import Template
 
 SEED = 42
-MIN_ITEMS = 100
-MAX_ITEMS = 500
+MIN_ITEMS = 10000
+MAX_ITEMS = 50000
 SCALING_FACTOR = (MAX_ITEMS + MIN_ITEMS) / 20
 
 random.seed(SEED)

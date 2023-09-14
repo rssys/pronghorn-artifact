@@ -6,10 +6,9 @@ import networkx as nx
 SEED = 42
 MIN_ITEMS = 10
 MAX_ITEMS = 1000
-SCALING_FACTOR = 10 # To be decided
+SCALING_FACTOR = 2 * MIN_ITEMS # To be decided
 
 random.seed(SEED)
-
 
 def _generate_workload(mutability):
   nextGaussian = random.gauss((MIN_ITEMS + MAX_ITEMS)/2, (mutability ** 0.5) * SCALING_FACTOR)
@@ -20,27 +19,22 @@ def _generate_workload(mutability):
   return nextGaussian
 
 def generate_input(mutability):
-    return { 'size': int(_generate_workload(mutability)) }
+  return { 'size': int(_generate_workload(mutability)) }
 
 def handle(mutability):
-
-    event = generate_input(mutability)
-
-    size = event.get('size')
-
-    graph_generating_begin = datetime.datetime.now()
-    graph = nx.barabasi_albert_graph(size, 10)
-    graph_generating_end = datetime.datetime.now()
-
-    process_begin = datetime.datetime.now()
-    result = nx.bfs_edges(graph, 0)
-    process_end = datetime.datetime.now()
-
-    graph_generating_time = (graph_generating_end - graph_generating_begin) / datetime.timedelta(microseconds=1)
-    process_time = (process_end - process_begin) / datetime.timedelta(microseconds=1)
-    return {
-      'mutability': mutability,
-      'size': size,
-      'server_time': process_time,
-      'client_overhead': graph_generating_time
-    }
+  event = generate_input(mutability)
+  size = event.get('size')
+  graph_generating_begin = datetime.datetime.now()
+  graph = nx.barabasi_albert_graph(size, 10)
+  graph_generating_end = datetime.datetime.now()
+  process_begin = datetime.datetime.now()
+  result = len(list(nx.edge_bfs(graph)))
+  process_end = datetime.datetime.now()
+  graph_generating_time = (graph_generating_end - graph_generating_begin) / datetime.timedelta(microseconds=1)
+  process_time = (process_end - process_begin) / datetime.timedelta(microseconds=1)
+  return {
+    'mutability': mutability,
+    'size': size,
+    'server_time': process_time,
+    'client_overhead': graph_generating_time
+  }

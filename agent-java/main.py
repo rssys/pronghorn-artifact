@@ -73,8 +73,8 @@ def after_request(latency):
 
             on_container_checkpoint(path)
 
-    evictions_env = os.getenv("EVICTIONS")
-    if evictions_env == "True":
+    evictions_env = os.getenv("ENV").split(",")[1]
+    if evictions_env == "true":
         if state["should_evict"]:
             print("Received eviction notice")
             pid = get_pypy_pid()
