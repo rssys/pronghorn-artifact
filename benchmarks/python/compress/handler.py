@@ -98,15 +98,8 @@ def handle(mutability):
     clean_resources(input_bucket, key)
     clean_resources(output_bucket, key_name)
     return {
-            'result': {
-                'bucket': output_bucket,
-                'key': key_name
-            },
-            'measurement': {
-                'download_time': download_time,
-                'download_size': size,
-                'upload_time': upload_time,
-                'upload_size': archive_size,
-                'compute_time': process_time
-            }
+        'mutability': mutability,
+        'size': archive_size,
+        'server_time': process_time,
+        'client_overhead': upload_time
         }

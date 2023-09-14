@@ -28,8 +28,8 @@ public class Handler implements com.openfaas.model.IHandler {
 
 	static int numItems;
 
-	static final int itemsMin = 100; /* Preset for the minimum of data length */
-	static final int itemsMax = 500; /* Preset for the maximum of data length */
+	static final int itemsMin = 10000; /* Preset for the minimum of data length */
+	static final int itemsMax = 100000; /* Preset for the maximum of data length */
 	static final double scalingFactor = (itemsMax / 20); /* Preset for scaling the mutability for length of data to be displayed */
 
   List<Item> items() {

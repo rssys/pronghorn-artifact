@@ -69,18 +69,8 @@ def handle(mutability):
     upload_time = (upload_end - upload_begin) / datetime.timedelta(microseconds=1)
     clean_resources(output_bucket, key_name)
     return {
-            'result': {
-                'bucket': output_bucket,
-                'url': url,
-                'key': key_name
-            },
-            'measurement': {
-                'download_time': 0,
-                'download_size': 0,
-                'upload_time': upload_time,
-                'upload_size': size,
-                'compute_time': process_time
-            },
-            'mutability': mutability,
-            'url': url
+      'mutability': mutability,
+      'size': size,
+      'server_time': upload_time,
+      'client_overhead': process_time
     }

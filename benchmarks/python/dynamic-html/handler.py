@@ -32,4 +32,8 @@ def handle(mutability):
     template = Template(open('resource/template.html', 'r').read())
     html = template.render(username = name, cur_time = cur_time, random_numbers = random_numbers)
     end = datetime.now()
-    return {'server_time': (end - start).microseconds, 'mutability': mutability, 'size': size}
+    return {
+        'server_time': (end - start).microseconds,
+        'mutability': mutability,
+        'size': size,
+    }

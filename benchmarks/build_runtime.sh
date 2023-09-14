@@ -21,14 +21,22 @@ not_ok_functions=()
 build_docker_image() {
   identifier=$1
   if [ $platform == "pypy" ]; then
-    build_folder="./"
+    build_folder="."
     function_service="agent-python"
   else
-    build_folder="./"
+    build_folder="."
     function_service="agent-java"
   fi
 
   faas-cli build --shrinkwrap -f "${identifier}.yml"
+
+  # List of identifiers where you want to use a separate Dockerfile
+  special_identifiers=("thumbnail" "video" "html-rendering" "json-parsing" "word-count")
+
+  if [[ " ${special_identifiers[@]} " =~ " ${identifier} " ]]; then
+    rm "${build_folder}/build/${identifier}/Dockerfile"
+    mv "${build_folder}/build/${identifier}/function/Dockerfile" "${build_folder}/build/${identifier}/"
+  fi
 
   echo "[$identifier] Injecting function-service..."
   rm -rf "${build_folder}/build/${identifier}/function-service" && echo "[$identifier] Service Deleted"
@@ -36,9 +44,9 @@ build_docker_image() {
   mv "${build_folder}/build/${identifier}/${function_service}" "${build_folder}/build/${identifier}/function-service" && echo "[$identifier] Service Renamed"
 
   echo "[$identifier] Building image..."
-  docker buildx build --allow security.insecure,network.host -t "$user/${identifier}" --push "${build_folder}/build/${identifier}" > /dev/null 2>&1
+  docker buildx build --allow security.insecure,network.host -t "$user/${identifier}:latest" --push "${build_folder}/build/${identifier}" > /dev/null 2>&1
   echo "[$identifier] Image built and pushed."
-  docker pull $user/${identifier} > /dev/null 2>&1
+  docker pull $user/${identifier}:latest > /dev/null 2>&1
   echo "[$identifier] Image pulled."
 }
 
@@ -47,7 +55,7 @@ deploy_test_function() {
   identifier=$1
 
   echo "[$identifier] Deploying function..."
-  faas-cli deploy --image=$user/${identifier} --name=${identifier} > /dev/null 2>&1
+  faas-cli deploy --image=$user/${identifier} --name=${identifier} --env STRATEGY=cold EVICTIONS=True > /dev/null 2>&1
   echo "[$identifier] Function deployed."
 
   sleep 5s

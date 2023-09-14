@@ -16,8 +16,8 @@ public class Handler implements com.openfaas.model.IHandler {
 		private static int seed = 42;
 		static Random random = new Random(seed);
 
-		private static final int lenMin = 50;
-		private static final int lenMax = 500;
+		private static final int lenMin = 50000;
+		private static final int lenMax = 1000000;
 		private static final double scalingFactor = 75;
 
 		public static double generateWorkload(double mutability, double min, double max, double scalingFactor) {
@@ -39,7 +39,7 @@ public class Handler implements com.openfaas.model.IHandler {
 		}
 
 		private static long benchmark() {
-			data = new byte[1024 * (int) generateWorkload(mutability, lenMin, lenMax, scalingFactor)]; 
+			data = new byte[(int) generateWorkload(mutability, lenMin, lenMax, scalingFactor)]; 
 			random.nextBytes(data);
 			long startTime = System.nanoTime();
 			int hash = simpleHash(data);

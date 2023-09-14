@@ -38,10 +38,8 @@ def handle(mutability):
     graph_generating_time = (graph_generating_end - graph_generating_begin) / datetime.timedelta(microseconds=1)
     process_time = (process_end - process_begin) / datetime.timedelta(microseconds=1)
     return {
-            'measurement': {
-                'graph_generating_time': graph_generating_time,
-                'compute_time': process_time
-            },
             'mutability': mutability,
-            'size': size
+            'size': size,
+            'server_time': process_time,
+            'client_overhead': graph_generating_time
     }

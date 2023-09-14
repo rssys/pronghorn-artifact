@@ -17,8 +17,8 @@ public class Handler implements com.openfaas.model.IHandler {
     private static int seed = 42;
     static Random random = new Random(seed);
 
-    private static final int dimMin = 10; /* Preset for the minimum of matrix dimension */
-    private static final int dimMax = 50; /* Preset for the maximum of matrix dimension */
+    private static final int dimMin = 100; /* Preset for the minimum of matrix dimension */
+    private static final int dimMax = 400; /* Preset for the maximum of matrix dimension */
     private static final double scalingFactor = 2; /* Preset for scaling the mutability for matrix dimension */
 
     private static int[][] multiplier = new int[dimension][dimension];

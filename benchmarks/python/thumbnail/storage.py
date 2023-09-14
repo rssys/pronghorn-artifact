@@ -8,14 +8,11 @@ class storage:
     client = None
 
     def __init__(self):
-        address = "10.244.0.20:9000"
-        access_key = "admin"
-        secret_key = "9rYYizXGYQ"
         self.client = minio.Minio(
-                address,
-                access_key=access_key,
-                secret_key=secret_key,
-                secure=False)
+        "minio-svc.stores.svc.cluster.local:9000",
+        access_key="minioadmin",
+        secret_key="minioadmin",
+        secure=False,)
 
     # Instigates overwriting, saves space, and reduces complexity
     @staticmethod

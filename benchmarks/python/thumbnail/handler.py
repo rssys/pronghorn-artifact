@@ -11,7 +11,7 @@ from function.storage import storage
 
 SEED = 42
 MIN_ITEMS = 1
-MAX_ITEMS = 5
+MAX_ITEMS = 10
 SCALING_FACTOR = 5 # To be decided
 
 random.seed(SEED)
@@ -90,16 +90,8 @@ def handle(mutability):
     clean_resources(input_bucket, key)
     clean_resources(output_bucket, key_name)
     return {
-            'result': {
-                'bucket': output_bucket,
-                'key': key_name
-            },
-            'measurement': {
-                'download_time': download_time,
-                'download_size': len(img),
-                'upload_time': upload_time,
-                'upload_size': resized_size,
-                'compute_time': process_time
-            },
-            'reps': reps
+      'mutability': mutability,
+      'size': resized_size,
+      'server_time': process_time,
+      'client_overhead': upload_time
     }
