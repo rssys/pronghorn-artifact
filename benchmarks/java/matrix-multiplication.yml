@@ -1,0 +1,9 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  matrix-multiplication:
+    lang: criu-java
+    handler: ./matrix-multiplication
+    image: skharban/matrix-multiplication:latest
