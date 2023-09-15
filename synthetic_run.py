@@ -43,8 +43,7 @@ STRATEGIES = [
     "fixed&request_to_checkpoint=1",
     "request_centric&max_capacity=12"
 ]
-RATE = [1, 4, 20]
-MUTABILITIES = ["1"]
+RATES = [1, 4, 20]
 
 ### Configure Logging Handlers
 
@@ -62,10 +61,9 @@ def check_namespace_pods():
     return int(result.stdout.strip())
 
 with open(filename, "a") as output_file:
-  for strategy in STRATEGIES:
-      for benchmark in BENCHMARKS:
-          for rate in RATE:
-            for mutability in MUTABILITIES:
+   for benchmark in BENCHMARKS:
+      for strategy in STRATEGIES:
+          for rate in RATES:
   
                 logger.info("Deploying %s function", benchmark)
                 deploy_cmd = f"faas-cli deploy --image=skharban/{benchmark} --name={benchmark} --env=ENV={strategy},true,{rate}"
@@ -74,10 +72,10 @@ with open(filename, "a") as output_file:
                 
                 time.sleep(5)
 
-                logger.info("Executing strategy: %s for benchmark %s with rate %s and mutability %s", strategy, benchmark, rate, mutability)
+                logger.info("Executing strategy: %s for benchmark %s with rate %s and mutability %s", strategy, benchmark, rate, "1")
                 
                 nums = re.compile(r"\d+ ms")
-                url = f"http://127.0.0.1:8080/function/{benchmark}?mutability={mutability}"
+                url = f"http://127.0.0.1:8080/function/{benchmark}?mutability=1"
                 for index, request in tqdm(enumerate(range(NUM_REQUESTS))):
                   for retry in range(3):
                     retries = 0
@@ -96,7 +94,7 @@ with open(filename, "a") as output_file:
                       client_side = (end_time - start_time) / datetime.timedelta(microseconds=1)
                       logger.debug("%s %s %s", server_side, overhead, client_side)
                       
-                      output_file.write(f"{index + 1},{benchmark},{mutability},{strategy},{client_side},{server_side},{overhead}\n")
+                      output_file.write(f"{index+ 1},{benchmark},1,{strategy},{rate},{client_side},{server_side},{overhead}\n")
                       time.sleep(REQUEST_DELAY/1000)
                     except:
                       retries += 1
@@ -104,7 +102,7 @@ with open(filename, "a") as output_file:
                     else:
                       break
                 output_file.flush()
-                logger.info("Completed strategy: %s for benchmark %s with mutability %s", strategy, benchmark, mutability)
+                logger.info("Completed strategy: %s for benchmark %s with mutability %s", strategy, benchmark, "1")
                 clean_cmd = f"faas-cli remove {benchmark}"
                 clean_proc = subprocess.run(clean_cmd.split(" "), capture_output=True)
                 logger.debug("Clean command response: %s", clean_proc.stdout.decode("UTF-8"))

@@ -1,6 +1,6 @@
 !/bin/bash
 
-List of all functions
+#List of all functions
 pypy_functions=( bfs dfs dynamic-html mst pagerank compress upload thumbnail video )
 jvm_functions=( matrix-multiplication simple-hash word-count html-rendering )
 

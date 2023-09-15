@@ -82,7 +82,7 @@ def after_request(latency):
             os.system(f"kill -9 {pid}")
             os.system("killall java")
             print("Killed Java Process")
-        sys.exit(0)
+            sys.exit(0)
     else:
         pass
 
