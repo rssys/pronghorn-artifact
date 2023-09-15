@@ -3,3 +3,5 @@ template/
 build/
 *.csv
 *.log
+Plot.ipynb
+*.out

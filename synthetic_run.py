@@ -43,7 +43,7 @@ STRATEGIES = [
     "fixed&request_to_checkpoint=1",
     "request_centric&max_capacity=12"
 ]
-RATES = [1, 4, 20]
+RATES = [20]
 
 ### Configure Logging Handlers
 
@@ -115,6 +115,10 @@ with open(filename, "a") as output_file:
                 redeploy_cmd = f"kubectl apply -f {os.path.expanduser('~/pronghorn-artifact/database/pod.yaml')}"
                 redeploy_proc = subprocess.run(redeploy_cmd.split(" "), capture_output=True)
                 logger.debug("Redeploy command response: %s", redeploy_proc.stdout.decode("UTF-8"))
+
+                minio_cleanup_cmd = f"mc rb myminio/checkpoints --force"
+                minio_cleanup_proc = subprocess.run(minio_cleanup_cmd.split(" "), capture_output=True)
+                logger.debug("MinIO cleanup command response: %s", minio_cleanup_proc.stdout.decode("UTF-8"))
 
                 # Check if there are pods in the openfaas-fn namespace
                 while check_namespace_pods() > 0:

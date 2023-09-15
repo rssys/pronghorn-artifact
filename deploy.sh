@@ -130,7 +130,7 @@ while true; do
 done
 
 # Port forward OpenFaaS Gateway
-kubectl port-forward -n openfaas svc/gateway 8080:8080 &
+nohup kubectl port-forward -n openfaas svc/gateway 8080:8080 &
 
 sleep 5s
 
@@ -209,3 +209,7 @@ if [[ "$attempts" -eq 3 ]]; then
     echo "[Error] MinIO Service Deployment Failed."
     exit 1
 fi
+
+nohup kubectl port-forward -n stores svc/minio-svc 9000:9000 &
+
+mc alias set myminio http://loocalhost:9000 minioadmin minioadmin
