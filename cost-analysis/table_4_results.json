@@ -1,0 +1,67 @@
+{
+  "BFS": {
+      "dump_time": {"mean": 85.6, "variance": 21},
+      "restore_time": {"mean": 73.8, "variance": 9.5},
+      "checkpoint_size": 55.5
+  },
+  "DFS": {
+      "dump_time": {"mean": 85.7, "variance": 21},
+      "restore_time": {"mean": 70.8, "variance": 13},
+      "checkpoint_size": 55.8
+  },
+  "MST": {
+      "dump_time": {"mean": 79.6, "variance": 23},
+      "restore_time": {"mean": 77.1, "variance": 2.1},
+      "checkpoint_size": 56.1
+  },
+  "DynamicHTML": {
+      "dump_time": {"mean": 74.4, "variance": 22},
+      "restore_time": {"mean": 75.3, "variance": 6.5},
+      "checkpoint_size": 54.1
+  },
+  "PageRank": {
+      "dump_time": {"mean": 74.4, "variance": 16},
+      "restore_time": {"mean": 80.5, "variance": 7.2},
+      "checkpoint_size": 64.0
+  },
+  "Uploader": {
+      "dump_time": {"mean": 100.2, "variance": 13},
+      "restore_time": {"mean": 30.2, "variance": 2.4},
+      "checkpoint_size": 61.2
+  },
+  "Thumbnailer": {
+      "dump_time": {"mean": 100.7, "variance": 14},
+      "restore_time": {"mean": 67.0, "variance": 6.3},
+      "checkpoint_size": 62.0
+  },
+  "Video": {
+      "dump_time": {"mean": 91.1, "variance": 12},
+      "restore_time": {"mean": 40.4, "variance": 2.4},
+      "checkpoint_size": 60.1
+  },
+  "Compression": {
+      "dump_time": {"mean": 105.0, "variance": 8.0},
+      "restore_time": {"mean": 39.1, "variance": 1.3},
+      "checkpoint_size": 61.0
+  },
+  "MatrixMult": {
+      "dump_time": {"mean": 66.1, "variance": 11},
+      "restore_time": {"mean": 51.5, "variance": 3.9},
+      "checkpoint_size": 10.6
+  },
+  "WordCount": {
+      "dump_time": {"mean": 67.9, "variance": 18},
+      "restore_time": {"mean": 55.2, "variance": 4.0},
+      "checkpoint_size": 13.3
+  },
+  "Hash": {
+      "dump_time": {"mean": 60.6, "variance": 13},
+      "restore_time": {"mean": 52.5, "variance": 3.8},
+      "checkpoint_size": 10.6
+  },
+  "HTMLRendering": {
+      "dump_time": {"mean": 70.7, "variance": 25},
+      "restore_time": {"mean": 50.4, "variance": 5.8},
+      "checkpoint_size": 10.5
+  }
+}

@@ -1,7 +1,8 @@
 __pycache__/
 template/
 build/
-*.csv
+data/java-evaluation.csv
+data/python-evaluation.csv
 *.log
 Plot.ipynb
 *.out

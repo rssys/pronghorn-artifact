@@ -1,0 +1,52 @@
+
+Benchmark: BFS
+storage_overhead: 666.0 MB
+network_bandwidth_overhead: 13875.0 MB
+
+Benchmark: DFS
+storage_overhead: 669.6 MB
+network_bandwidth_overhead: 13950.0 MB
+
+Benchmark: MST
+storage_overhead: 673.2 MB
+network_bandwidth_overhead: 14025.0 MB
+
+Benchmark: DynamicHTML
+storage_overhead: 649.2 MB
+network_bandwidth_overhead: 13525.0 MB
+
+Benchmark: PageRank
+storage_overhead: 768.0 MB
+network_bandwidth_overhead: 16000.0 MB
+
+Benchmark: Uploader
+storage_overhead: 734.4 MB
+network_bandwidth_overhead: 15300.0 MB
+
+Benchmark: Thumbnailer
+storage_overhead: 744.0 MB
+network_bandwidth_overhead: 15500.0 MB
+
+Benchmark: Video
+storage_overhead: 721.2 MB
+network_bandwidth_overhead: 15025.0 MB
+
+Benchmark: Compression
+storage_overhead: 732.0 MB
+network_bandwidth_overhead: 15250.0 MB
+
+Benchmark: MatrixMult
+storage_overhead: 127.2 MB
+network_bandwidth_overhead: 2650.0 MB
+
+Benchmark: WordCount
+storage_overhead: 159.6 MB
+network_bandwidth_overhead: 3325.0 MB
+
+Benchmark: Hash
+storage_overhead: 127.2 MB
+network_bandwidth_overhead: 2650.0 MB
+
+Benchmark: HTMLRendering
+storage_overhead: 126.0 MB
+network_bandwidth_overhead: 2625.0 MB

@@ -32,26 +32,34 @@ uid = datetime.datetime.now().strftime("%m-%d-%H:%M:%S")
 NUM_REQUESTS = int(sys.argv[1])
 REQUEST_DELAY = int(sys.argv[2]) # in ms
 test = sys.argv[4]
-filename = ""
+filename = "data/"
 if sys.argv[3] == "pypy": 
-  filename = "python-" + test + ".csv"
+  filename += "python-" + test + ".csv"
 else:
-   filename = "java-" + test + ".csv"
+   filename += "java-" + test + ".csv"
 BENCHMARKS = sys.argv[5:]
 STRATEGIES = [
     "cold",
     "fixed&request_to_checkpoint=1",
     "request_centric&max_capacity=12"
 ]
-RATES = [20]
+RATES = [20, 4, 1]
 
 ### Configure Logging Handlers
 
+log_directory = "logs"
+if not os.path.exists(log_directory):
+    os.makedirs(log_directory)
+
+data_directory = "data"
+if not os.path.exists(data_directory):
+    os.makedirs(data_directory)
+
 logger = logging.getLogger()
 if sys.argv[3] == "pypy": 
-  logging.basicConfig(filename="python-" + test + ".log", format='%(asctime)s %(filename)s: %(message)s', filemode='a+')
+  logging.basicConfig(filename="logs/python-" + test + ".log", format='%(asctime)s %(filename)s: %(message)s', filemode='a+')
 else:
-   logging.basicConfig(filename="java-" + test + ".log", format='%(asctime)s %(filename)s: %(message)s', filemode='a+')
+   logging.basicConfig(filename="logs/java-" + test + ".log", format='%(asctime)s %(filename)s: %(message)s', filemode='a+')
 logger.setLevel(logging.DEBUG)
 
 def check_namespace_pods():
