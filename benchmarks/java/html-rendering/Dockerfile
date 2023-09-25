@@ -4,19 +4,21 @@ FROM firebolt55439/criu:latest as criu
 
 FROM pfelipefeitosa/of-watchdog:criu-light as watchdog
 
-FROM openjdk:8u212-jdk-alpine as builder
+# FROM openjdk:8u212-jdk-alpine as builder
+FROM openjdk:17-alpine as builder
 
 RUN apk --no-cache add curl \
     && addgroup -S app && adduser -S -g app app \
     && mkdir -p /opt/ && cd /opt/ \
     && echo "Downloading gradle.." \
-    && curl -sSfL https://services.gradle.org/distributions/gradle-5.5.1-bin.zip -o gradle-bin.zip \
+    # && curl -sSfL https://services.gradle.org/distributions/gradle-5.5.1-bin.zip -o gradle-bin.zip \
+    && curl -sSfL https://services.gradle.org/distributions/gradle-7.2-bin.zip -o gradle-bin.zip \
     && unzip gradle-bin.zip -d /opt/ \
     && rm gradle-bin.zip \
     && apk del curl
 
-# Export some environment variables
-ENV GRADLE_HOME=/opt/gradle-5.5.1/
+# ENV GRADLE_HOME=/opt/gradle-5.5.1/
+ENV GRADLE_HOME=/opt/gradle-7.2/
 ENV PATH=$PATH:$GRADLE_HOME/bin
 
 RUN mkdir -p /home/app/libs
@@ -28,7 +30,8 @@ COPY . /home/app/
 
 RUN gradle build
 
-FROM openjdk:8u212-jdk-alpine as ship
+# FROM openjdk:8u212-jdk-alpine as ship
+FROM openjdk:17-alpine as ship
 
 COPY --from=criu /usr/local/sbin/criu /usr/local/sbin/criu
 COPY --from=criu /usr/lib/libprotobuf-c.so.1 /usr/lib/libprotobuf-c.so.1
@@ -47,8 +50,9 @@ RUN rm ./entrypoint-1.0.zip
 COPY warmup.sh .
 RUN chmod +x warmup.sh
 RUN apk --no-cache add musl-dev linux-headers g++ openblas-dev
-RUN apk --no-cache add curl python3-dev
+RUN apk --no-cache add curl python3-dev py3-pip # Add py3-pip to install pip3
 RUN apk --no-cache add iptables
+RUN pip3 install --upgrade pip
 RUN pip3 install requests minio numpy
 
 ENV upstream_url="http://127.0.0.1:8080"

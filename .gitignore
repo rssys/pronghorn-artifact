@@ -6,3 +6,4 @@ data/python-evaluation.csv
 *.log
 Plot.ipynb
 *.out
+*.csv
