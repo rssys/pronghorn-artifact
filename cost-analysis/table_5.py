@@ -1,7 +1,7 @@
 import json
 
 # Load the JSON data
-with open("stats.json", "r") as f:
+with open("table_5.json", "r") as f:
     data = json.load(f)
 
 # Set checkpoint pool
