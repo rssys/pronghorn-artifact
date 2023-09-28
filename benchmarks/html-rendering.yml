@@ -4,6 +4,6 @@ provider:
   gateway: http://127.0.0.1:8080
 functions:
   html-rendering:
-    lang: criu-java
+    lang: criu-java-8
     handler: ./java/html-rendering
     image: pronghornae/html-rendering:latest

@@ -4,6 +4,6 @@ provider:
   gateway: http://127.0.0.1:8080
 functions:
   word-count:
-    lang: criu-java
+    lang: criu-java-8
     handler: ./java/word-count
     image: pronghornae/word-count:latest

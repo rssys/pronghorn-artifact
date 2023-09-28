@@ -4,6 +4,6 @@ provider:
   gateway: http://127.0.0.1:8080
 functions:
   matrix-multiplication:
-    lang: criu-java
+    lang: criu-java-8
     handler: ./java/matrix-multiplication
     image: pronghornae/matrix-multiplication:latest

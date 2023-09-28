@@ -4,6 +4,6 @@ provider:
   gateway: http://127.0.0.1:8080
 functions:
   json-parsing:
-    lang: criu-java
+    lang: criu-java-8
     handler: ./java/json-parsing
     image: pronghornae/json-parsing:latest
