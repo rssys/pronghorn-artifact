@@ -1,0 +1,56 @@
+plugins {
+    // Apply the Java plugin to add support for Java
+    id 'java'
+
+    // Apply the application plugin to add support for building an application
+    id 'application'
+
+    id 'maven-publish' // Add the maven-publish plugin
+}
+
+// Define the main class for the application
+application {
+    mainClassName = 'App'
+}
+
+dependencies {
+    // This dependency is found on the compile classpath of this component and consumers.
+    implementation 'com.google.guava:guava:23.0'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+
+    implementation project(':model')
+    implementation project(':function')
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'OpenFaaS Function',
+                   'Implementation-Version': version
+    }
+}
+
+// In this section, you declare where to find the dependencies of your project
+repositories {
+    // Use JCenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            groupId = 'your.group.id'
+            artifactId = 'your-artifact-id'
+            version = 'your-version'
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'repos'
+        }
+    }
+}

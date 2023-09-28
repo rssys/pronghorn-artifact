@@ -6,4 +6,4 @@ functions:
   mst:
     lang: criu-pypy
     handler: ./python/mst
-    image: skharban/mst:latest
+    image: pronghornae/mst:latest

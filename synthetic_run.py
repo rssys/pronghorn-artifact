@@ -68,13 +68,15 @@ def check_namespace_pods():
     result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     return int(result.stdout.strip())
 
+user="pronghornae"
+
 with open(filename, "a") as output_file:
    for benchmark in BENCHMARKS:
       for strategy in STRATEGIES:
           for rate in RATES:
   
                 logger.info("Deploying %s function", benchmark)
-                deploy_cmd = f"faas-cli deploy --image=skharban/{benchmark} --name={benchmark} --env=ENV={strategy},true,{rate}"
+                deploy_cmd = f"faas-cli deploy --image={user}/{benchmark} --name={benchmark} --env=ENV={strategy},true,{rate}"
                 deploy_proc = subprocess.run(deploy_cmd.split(" "), capture_output=True)
                 logger.debug("Deploy command response: %s", deploy_proc.stdout.decode("UTF-8"))
                 

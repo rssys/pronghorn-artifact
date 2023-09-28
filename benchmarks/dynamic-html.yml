@@ -6,5 +6,5 @@ functions:
   dynamic-html:
     lang: criu-pypy
     handler: ./python/dynamic-html
-    image: skharban/dynamic-html:latest
+    image: pronghornae/dynamic-html:latest
 

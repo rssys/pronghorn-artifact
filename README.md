@@ -14,7 +14,7 @@ Software Requirements:
 - Docker Engine v20.10.12 or higher. 
 - Kubernetes Server v1.21.1 or higher.
 
-Note: Please make sure to login to your DockerHub account on the testbed to make sure that the Kubernetes can pull the function images from the appropriate image registry.
+Note: Please make sure to login to your DockerHub account on the testbed to make sure that the Kubernetes can pull the function images from the appropriate image registry. A dummy DockerHub account will be provided in the Artifact Appendix to simplify artifact evaluation for the evaluators.
 
 Toolchain Requirements:
 

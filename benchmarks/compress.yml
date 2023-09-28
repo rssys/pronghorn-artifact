@@ -6,4 +6,4 @@ functions:
   compress:
     lang: criu-pypy
     handler: ./python/compress
-    image: skharban/compress:latest
+    image: pronghornae/compress:latest

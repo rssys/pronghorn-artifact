@@ -6,4 +6,4 @@ functions:
   json-parsing:
     lang: criu-java
     handler: ./java/json-parsing
-    image: skharban/json-parsing:latest
+    image: pronghornae/json-parsing:latest

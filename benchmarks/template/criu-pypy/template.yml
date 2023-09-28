@@ -1,0 +1,2 @@
+language: criu-pypy
+fprocess: pypy3 index.py

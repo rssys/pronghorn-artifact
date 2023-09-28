@@ -6,4 +6,4 @@ functions:
   word-count:
     lang: criu-java
     handler: ./java/word-count
-    image: skharban/word-count:latest
+    image: pronghornae/word-count:latest

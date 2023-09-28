@@ -6,4 +6,4 @@ functions:
   dfs:
     lang: criu-pypy
     handler: ./python/dfs
-    image: skharban/dfs:latest
+    image: pronghornae/dfs:latest

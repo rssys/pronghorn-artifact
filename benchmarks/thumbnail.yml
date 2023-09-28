@@ -6,4 +6,4 @@ functions:
   thumbnail:
     lang: criu-pypy
     handler: ./python/thumbnail
-    image: skharban/thumbnail:latest
+    image: pronghornae/thumbnail:latest

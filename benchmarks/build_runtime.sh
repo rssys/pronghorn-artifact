@@ -8,7 +8,7 @@ IFS=', ' read -r -a functions <<< "$function_string"
 platform=$2
 
 # User
-user=skharban
+user=pronghornae
 
 # Directory of the script
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
@@ -55,7 +55,7 @@ deploy_test_function() {
   identifier=$1
 
   echo "[$identifier] Deploying function..."
-  faas-cli deploy --image=$user/${identifier} --name=${identifier} --env=ENV=cold,true,1 > /dev/null 2>&1
+  faas-cli deploy --image=$user/${identifier} --name=${identifier} --env=ENV=cold,true,1 > /dev/null
   echo "[$identifier] Function deployed."
 
   sleep 5s

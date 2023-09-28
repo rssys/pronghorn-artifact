@@ -6,5 +6,5 @@ functions:
   simple-hash:
     lang: criu-java
     handler: ./java/simple-hash
-    image: skharban/simple-hash
+    image: pronghornae/simple-hash
 

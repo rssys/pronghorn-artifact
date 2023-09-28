@@ -6,4 +6,4 @@ functions:
   upload:
     lang: criu-pypy
     handler: ./python/upload
-    image: skharban/upload:latest
+    image: pronghornae/upload:latest

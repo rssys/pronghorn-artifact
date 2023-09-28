@@ -6,5 +6,5 @@ functions:
   video:
     lang: criu-pypy
     handler: ./python/video
-    image: skharban/video:latest
+    image: pronghornae/video:latest
 
