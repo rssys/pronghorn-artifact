@@ -185,6 +185,69 @@ Table 4: For each benchmark, the requests taken by Pronghorn to find the optimal
 
 Table 5: For each benchmark, the maximum storage used by Pronghorn’s orchestration strategy, the maximum cumulative network bandwidth used to transfer snapshots, and the baseline values for state-of-the-art.
 
+## Reproducing key results:
+
+### Figures 4 and 5
+
+**Duration:** 30 human-minutes + 48 compute-hour
+
+In this experiment, we conduct a comprehensive evaluation encompassing all benchmarks, strategies, and eviction rates, as presented in Section 5 of the paper.
+
+**Preparation:**
+The Pronghorn setup process automatically generates the necessary configurations for this experiment. No additional steps are necessary.
+
+**Execution:**
+To initiate the experiment, simply execute the `run.sh` script located in the root directory with the `evaluation` argument. Given the extended duration of this experiment, we advise running the command in the background using a mechanism such as `nohup ./run.sh evaluation &` to ensure uninterrupted execution.
+
+**Results:**
+The results will be created as CSV files in the `results/` directory. The `Evaluation.ipynb` plotting script provided in the `figures/` directory can be used to interactively create Figure 4 and Figure 5 of the paper.
+
+### Table 4
+
+**Duration:** 1 human-hour + 1 compute-hour
+
+This experiment enables the assessment of the system’s checkpoint and restore overhead.
+
+**Preparation:**
+Deploy any function using `faas-cli deploy --image=USER/workload --name=workload`.
+
+**Execution:**
+Copy the script `cost-analysis/table4.py` to the pod created by OpenFaaS. Next, attach to the pod using `kubectl exec -it $pod name -- /bin/sh` and run the script within the pod. Copy the JSON emitted by the program to a file that can be used for the analysis.
+
+**Results:**
+If required, this can be done for all functions. However, for convenience, a result JSON file has been attached from our evaluation run. The results provide the numbers for the checkpoint, restore, and snapshot overheads presented in Table 4.
+
+### Table 4
+
+**Duration:** 10 human-minutes + 10 compute-minutes
+
+This experiment quantifies the number of requests needed for Pronghorn to reach an optimal snapshot state.
+
+**Preparation:**
+The evaluation run will produce the necessary inputs for this experiment.
+
+**Execution:**
+To compute and display the results, simply execute the `cost-analysis/evaluation cost.ipynb` notebook.
+
+**Results:**
+The output obtained from the notebook can be directly compared with Table 4 of the paper.
+
+### Table 5
+
+**Duration:** 10 human-minutes + 10 compute-minutes
+
+This experiment allows evaluating the storage and network bandwidth usage of Pronghorn.
+
+**Preparation:**
+The data collected for E2 will produce the necessary inputs for this experiment.
+
+**Execution:**
+To compute and display the results, simply run the `cost-analysis/table 5.py` notebook.
+
+**Results:**
+The output obtained from the notebook can be directly compared with Table 5 of the paper.
+
+
 ## Directory Structure
 
 ```
