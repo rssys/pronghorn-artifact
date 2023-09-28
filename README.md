@@ -113,7 +113,7 @@ stores        database-75dc6bb78f-6zr2n                 1/1     Running     0   
 
 ⏰ Estimated time: 15 machine minutes + 0 human minutes.
 
-The repository includes a `benchmarks/build.sh` script, which automates the process of building the images for all the benchmarks and pushes it to the remote image registry.
+The repository includes a `benchmarks/build.sh` script, which automates the process of building the images for all the benchmarks and pushes it to the remote image registry. The description of the workloads in the benchmarking suite can be found in Table 3 of the paper.
 
 ```bash
 cd benchmarks
