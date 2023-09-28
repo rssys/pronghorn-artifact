@@ -173,7 +173,7 @@ Run the script `./run.sh suite`. This script will automatically run the whole pi
 
 Run the script `./run.sh evaluation`. This script will automatically run the whole pipeline of Pronghorn for the entire benchmarking suite and will produce two CSV files. pypy.csv and jvm.csv, which can be utilized to reproduce the figure X and figure Y in the paper.
 
-## Here is a list of the key results in the paper:
+## Key results in the paper:
 
 Figure 4: The Cumulative Distribution Function (CDF) of end-to-end request latency in microseconds of Python benchmarks (rows) across the evaluated orchestration strategies 
 and three different container eviction rates (columns).
