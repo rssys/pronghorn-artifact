@@ -3,15 +3,17 @@
 # Store the initial working directory
 INITIAL_DIR=$(pwd)
 
-# Directory with the trace
-DIR="."
+# create a results directory if not there
+DIR="results"
+if [ ! -d "$DIR" ]; then
+    mkdir $DIR
+fi
 
 #List of all functions
-# functions=( bfs dfs dynamic-html mst pagerank compress upload thumbnail video matrix-multiplication simple-hash word-count html-rendering )
-functions=( bfs )
+functions=( bfs dfs dynamic-html mst pagerank compress upload thumbnail video )
 
 #List of all strategies
-strategies=( "fixed&request_to_checkpoint=1" "request_centric&max_capacity=12" )
+strategies=( cold "fixed&request_to_checkpoint=1" "request_centric&max_capacity=12" )
 
 # Loop through each function and for each function each strategy
 for function in "${functions[@]}"

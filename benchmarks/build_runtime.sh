@@ -44,7 +44,7 @@ build_docker_image() {
   mv "${build_folder}/build/${identifier}/${function_service}" "${build_folder}/build/${identifier}/function-service" && echo "[$identifier] Service Renamed"
 
   echo "[$identifier] Building image..."
-  docker buildx build --allow security.insecure,network.host -t "$user/${identifier}:latest" --push "${build_folder}/build/${identifier}" > /dev/null 2>&1
+  docker buildx build --allow security.insecure,network.host -t "$user/${identifier}:latest" --push "${build_folder}/build/${identifier}" > /dev/null
   echo "[$identifier] Image built and pushed."
   docker pull $user/${identifier}:latest > /dev/null 2>&1
   echo "[$identifier] Image pulled."
