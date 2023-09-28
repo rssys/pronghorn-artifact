@@ -157,19 +157,19 @@ jvm Functions that did NOT return OK:
 
 ## Basic Test
 
-⏰ Estimated time: X machine minutes + Y human minutes.
+⏰ Estimated time: 15 machine minutes + 5 human minutes.
 
 Run the script `./run.sh basic`. This script will automatically run the whole pipeline of Pronghorn for one of the functions in the benchmarks and produce the results for chosen (function, runtime) in a CSV file, which can be used to produce a CDF plot of the latency.
 
 ## Suite Test
 
-⏰ Estimated time: X machine minutes + Y human minutes.
+⏰ Estimated time: 24 machine hours + 5 human minutes.
 
 Run the script `./run.sh suite`. This script will automatically run the whole pipeline of Pronghorn for one of the suites (java or python) in the benchmarks and produce the results in a CSV file, which can be used to produce a CDF plot of the latency.
 
 ## Evaluation
 
-⏰ Estimated time: X machine minutes + Y human minutes.
+⏰ Estimated time: 48 machine minutes + 5 human minutes.
 
 Run the script `./run.sh evaluation`. This script will automatically run the whole pipeline of Pronghorn for the entire benchmarking suite and will produce two CSV files. pypy.csv and jvm.csv, which can be utilized to reproduce the figure X and figure Y in the paper.
 
