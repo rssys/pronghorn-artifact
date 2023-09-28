@@ -177,9 +177,12 @@ Run the script `./run.sh evaluation`. This script will automatically run the who
 
 Figure 4: The Cumulative Distribution Function (CDF) of end-to-end request latency in microseconds of Python benchmarks (rows) across the evaluated orchestration strategies 
 and three different container eviction rates (columns).
+
 Figure 5: The Cumulative Distribution Function (CDF) of end-to-end request latency in microseconds of Java benchmarks (rows) across the evaluated orchestration strategies 
 and three different container eviction rates (columns).
+
 Table 4: For each benchmark, the requests taken by Pronghorn to find the optimal snapshot; snapshot sizes; and checkpoint/restore times.
+
 Table 5: For each benchmark, the maximum storage used by Pronghorn’s orchestration strategy, the maximum cumulative network bandwidth used to transfer snapshots, and the baseline values for state-of-the-art.
 
 ## Directory Structure
