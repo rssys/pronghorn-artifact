@@ -169,7 +169,7 @@ Run the script `./run.sh suite`. This script will automatically run the whole pi
 
 ## Evaluation
 
-⏰ Estimated time: 48 machine minutes + 5 human minutes.
+⏰ Estimated time: 48 machine hours + 5 human minutes.
 
 Run the script `./run.sh evaluation`. This script will automatically run the whole pipeline of Pronghorn for the entire benchmarking suite and will produce two CSV files. pypy.csv and jvm.csv, which can be utilized to reproduce the figure X and figure Y in the paper.
 
