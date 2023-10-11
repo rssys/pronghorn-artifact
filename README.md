@@ -1,4 +1,4 @@
-[https://drive.google.com/uc?export=view&id=1kDkm_ZBX0KJkOo5E74d03pGjucAD2v2r]
+![image](https://drive.google.com/uc?export=view&id=1kDkm_ZBX0KJkOo5E74d03pGjucAD2v2r)
 
 # Pronghorn Artifact Evaluation
 
