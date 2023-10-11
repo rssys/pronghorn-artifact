@@ -1,5 +1,3 @@
-![image](https://drive.google.com/uc?export=view&id=10-7SAiHYq8n_PWA0tBco98AaobKFqf7-)
-
 # Pronghorn Artifact Evaluation
 
 Pronghorn is a snapshot orchestrator for serverless platforms, which accelerates the average execution latency of deployed functions.
