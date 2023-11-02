@@ -212,4 +212,4 @@ fi
 
 nohup kubectl port-forward -n stores svc/minio-svc 9000:9000 &
 
-mc alias set myminio http://loocalhost:9000 minioadmin minioadmin
+mc alias set myminio http://localhost:9000 minioadmin minioadmin
