@@ -124,6 +124,8 @@ class RequestCentricStrategy(CRStrategy):
         interval = list(
             range(state.request_number + 1, state.request_number + len(weights) + 1)
         )
+        if not interval:
+            return 50000 # do not use a checkpoint
         weights = [self._weights_for(i, scalar=True) for i in interval]
         desired_request = random.choices(
             interval,
