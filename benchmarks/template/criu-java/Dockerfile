@@ -50,12 +50,12 @@ RUN rm ./entrypoint-1.0.zip
 
 COPY warmup.sh .
 RUN chmod +x warmup.sh
-RUN apk --no-cache add musl-dev linux-headers g++ openblas-dev
+RUN apk --no-cache add musl-dev linux-headers g++ openblas-dev libffi-dev gcc
 RUN apk --no-cache add curl python3-dev py3-pip # Add py3-pip to install pip3
 RUN apk --no-cache add curl python3-dev
 RUN apk --no-cache add iptables
 RUN pip3 install --upgrade pip
-RUN pip3 install requests minio numpy
+RUN pip3 install requests minio==7.1.16 numpy
 
 ENV upstream_url="http://127.0.0.1:8080"
 ENV mode="http"

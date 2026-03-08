@@ -33,7 +33,7 @@ RUN pypy3 -m pip install --user -r requirements.txt
 
 RUN apk --no-cache add curl python3
 RUN apk --no-cache add iptables
-RUN python3 -m pip install requests minio
+RUN python3 -m pip install requests minio==7.1.16
 
 ARG TEST_COMMAND=tox
 ARG TEST_ENABLED=true

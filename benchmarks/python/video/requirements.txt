@@ -1,1 +1,1 @@
-minio
+minio==7.1.16

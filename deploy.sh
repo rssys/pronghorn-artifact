@@ -72,7 +72,7 @@ echo "      volumes:
 # Default configuration
 nodes=3
 cpus=2
-memory="8G"
+memory="4G"
 disk_size="50G"
 
 # Bootstrap The Nodes
@@ -103,7 +103,7 @@ echo "[Completed] Kuberentes cluster created with $nodes nodes, $cpus CPUs, $mem
 export KUBECONFIG="$DIR/kubeconfig"
 
 # Install OpenFaaS
-arkade install openfaas --set faasnetes.image=skharban/faas-netes:privileged-containers &> /dev/null
+arkade install openfaas-ce --set faasnetes.image=skharban/faas-netes:privileged-containers &> /dev/null
 if kubectl get namespace openfaas &> /dev/null; then
     echo "[Completed] OpenFaaS Installed."
 else

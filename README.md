@@ -50,7 +50,7 @@ Configuration Requirements:
 - Create the Docker Builder
 
 ```bash
-docker buildx create --use --name pronghorn-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host'
+docker buildx create --use --name pronghorn-builder --driver-opt network=host --buildkitd-flags '--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host'
 
 docker buildx inspect --bootstrap
 ```
